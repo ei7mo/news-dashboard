@@ -17,8 +17,8 @@ function Home({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchAllNews(country, category, articles, setArticles, setLoading);
-  }, [category]);
+    fetchAllNews(country, category, setArticles, setLoading);
+  }, [category, country, setArticles]);
 
   return (
     <>

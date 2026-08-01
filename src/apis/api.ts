@@ -3,12 +3,11 @@ import type { Article } from "../types/articles";
 export const fetchAllNews = async (
   country: string,
   category: string,
-  articles: Article[],
   setArticles: (articles: Article[]) => void,
-  setLoading: (loading: boolean) => void,
+  setLoading?: (loading: boolean) => void,
 ) => {
   try {
-    setLoading(true);
+    setLoading?.(true);
     const response = await fetch(
       `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${import.meta.env.VITE_API_KEY}`,
     );
@@ -18,7 +17,7 @@ export const fetchAllNews = async (
   } catch (err) {
     console.log(err);
   } finally {
-    setLoading(false);
+    setLoading?.(false);
   }
 };
 

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Link, useLocation } from "react-router-dom";
 import { fetchAllNews, fetchSearchNews } from "../apis/api";
+import type { Article } from "../types/articles";
 
 const LINKS = [
   "Business",
@@ -13,7 +14,11 @@ const LINKS = [
   "Technology",
 ];
 
-function Navbar({ setArticles }: { setArticles: (articles: any[]) => void }) {
+function Navbar({
+  setArticles,
+}: {
+  setArticles: (articles: Article[]) => void;
+}) {
   const { theme, setTheme } = useContext(ThemeContext);
   const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -33,7 +38,7 @@ function Navbar({ setArticles }: { setArticles: (articles: any[]) => void }) {
     if (!search.trim()) {
       const category =
         location.pathname === "/" ? "general" : location.pathname.slice(1);
-      fetchAllNews("us", category, [], setArticles);
+      fetchAllNews("us", category, setArticles);
       return;
     }
     fetchSearchNews(search, setArticles);

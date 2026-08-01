@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import { ThemeContext } from "./contexts/ThemeContext";
+import type { Article } from "./types/articles";
 
 function App() {
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
